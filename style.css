@@ -1,0 +1,220 @@
+/* Global Styles */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #e74c3c;
+    --accent-color: #27ae60;
+    --background-dark: #1a1a2e;
+    --card-red: #e74c3c;
+    --card-black: #2c3e50;
+    --table-felt: #0a5c36;
+    --text-light: #ecf0f1;
+    --text-dark: #2c3e50;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 1rem;
+}
+
+/* Game Container */
+.game-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.bankroll {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f1c40f;
+}
+
+/* Game Areas */
+.dealer-area, .player-area {
+    background-color: var(--table-felt);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.hand {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 150px;
+    margin: 1rem 0;
+}
+
+/* Card Styles */
+.card {
+    width: 100px;
+    height: 140px;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    position: relative;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.card.red {
+    color: var(--card-red);
+}
+
+.card.black {
+    color: var(--card-black);
+}
+
+.card.back {
+    background: linear-gradient(45deg, #c0392b, #8e44ad);
+    color: white;
+    font-size: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.card.back::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.1) 10px,
+        transparent 10px,
+        transparent 20px
+    );
+    border-radius: 10px;
+}
+
+/* Button Styles */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    margin: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+#hit {
+    background-color: var(--accent-color);
+}
+
+#stand {
+    background-color: #e67e22;
+}
+
+#double-down {
+    background-color: #9b59b6;
+}
+
+/* Bet Controls */
+.bet-controls, .game-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem 0;
+    gap: 0.5rem;
+}
+
+input[type="number"] {
+    padding: 0.8rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 120px;
+    text-align: center;
+}
+
+/* Message Display */
+.message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    min-height: 2rem;
+}
+
+/* Animations */
+@keyframes dealCard {
+    from { transform: translateY(-50px) rotate(-10deg); opacity: 0; }
+    to { transform: translateY(0) rotate(0); opacity: 1; }
+}
+
+.card.dealt {
+    animation: dealCard 0.5s ease-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 1rem;
+    }
+    
+    .card {
+        width: 70px;
+        height: 100px;
+        font-size: 1.8rem;
+    }
+    
+    button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    input[type="number"] {
+        width: 100px;
+    }
+}
