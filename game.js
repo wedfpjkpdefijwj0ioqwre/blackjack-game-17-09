@@ -197,9 +197,14 @@ function startGame() {
     gameControls.style.display = 'flex';
     newGameBtn.style.display = 'none';
     
-    // Check for blackjack
+    // Check for blackjack (Ace + 10/J/Q/K)
     const playerScore = calculateHandValue(gameState.playerHand);
-    if (playerScore === 21 && gameState.playerHand.length === 2) {
+    const isBlackjack = (playerScore === 21 && 
+                        gameState.playerHand.length === 2 && 
+                        ((gameState.playerHand[0].value === 'A' && ['10', 'J', 'Q', 'K'].includes(gameState.playerHand[1].value)) ||
+                         (gameState.playerHand[1].value === 'A' && ['10', 'J', 'Q', 'K'].includes(gameState.playerHand[0].value))));
+    
+    if (isBlackjack) {
         // Player has blackjack, check if dealer also has blackjack
         const dealerScore = calculateHandValue([gameState.dealerHand[1]]); // Only check dealer's up card
         if (dealerScore === 10) {
